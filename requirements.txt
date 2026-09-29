@@ -1,0 +1,7 @@
+# Python 3.11 / 3.12. Keep the legacy mp.solutions API used by this project.
+numpy==1.26.4
+mediapipe==0.10.14
+opencv-contrib-python==4.10.0.84
+# MediaPipe imports JAX; pin a pair compatible with NumPy 1.x.
+jax==0.4.30
+jaxlib==0.4.30
