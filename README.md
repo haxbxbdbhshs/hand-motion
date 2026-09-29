@@ -13,7 +13,10 @@
 окружении Python 3.12; более новые версии Python пока не поддерживаются этой
 конфигурацией зависимостей.
 
-Открой PowerShell в папке проекта:
+Открой PowerShell в папке проекта. Следующие команды рассчитаны на новую
+папку `.venv`. Если она уже есть после другой версии Python, сначала
+переименуй её: `Rename-Item .venv .venv-backup` (выбери свободное имя).
+Создание окружения поверх старого не удаляет несовместимые пакеты.
 
 ```powershell
 py -3.12 -m venv .venv
@@ -28,6 +31,27 @@ py -3.12 -m venv .venv
 
 При нескольких камерах: `main.py --camera 1`. Путь к другой модели:
 `main.py --model path/to/model.task`. Справка: `main.py --help`.
+
+## Ошибка импорта MediaPipe
+
+Если появляется `No module named 'mediapipe.python._framework_bindings'`,
+в окружении могут остаться бинарные файлы от другой версии Python.
+Например, файл `cp311-win_amd64.pyd` не загрузится в Python 3.12.
+
+Закрой приложение и терминалы, использующие окружение. В новом PowerShell
+из папки проекта пересоздай окружение, сохранив старое:
+
+```powershell
+Rename-Item .venv .venv-backup
+py -3.12 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -c "import mediapipe as mp; print(mp.__version__)"
+.\.venv\Scripts\python.exe main.py
+```
+
+Если `.venv-backup` уже существует, используй другое имя резервной папки.
+Для виртуальной камеры установи `requirements-virtual.txt` вместо
+`requirements.txt`. Не копируй `site-packages` из старого окружения.
 
 ## Управление
 
