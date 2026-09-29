@@ -6,6 +6,7 @@ FILES = (
     'main.py', 'virtual_camera.py', 'runtime.py', 'download_model.py',
     'requirements.txt', 'requirements-virtual.txt', 'README.md', '.gitignore',
     'run_virtual_camera.bat', 'tests/test_app.py', 'build_release.py',
+    'docs/images/gesture-guide.png', 'docs/gesture-guide-prompt.md',
 )
 
 
