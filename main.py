@@ -12,7 +12,6 @@ from mediapipe.tasks.python import vision
 mp_hands = mp.solutions.hands
 hands = None
 
-mp_draw = mp.solutions.drawing_utils
 cap = None
 frame_index = 0
 active_region_points = None
@@ -656,18 +655,6 @@ def main():
                 status_color = (0, 0, 255)
 
             draw_index_trails(frame)
-
-            if results.multi_hand_landmarks:
-                for hand_landmarks in results.multi_hand_landmarks:
-                    mp_draw.draw_landmarks(
-                        frame,
-                        hand_landmarks,
-                        mp_hands.HAND_CONNECTIONS
-                    )
-
-            for index, point in enumerate(fingertip_points):
-                color = (255, 0, 255) if index % 2 == 0 else (0, 255, 0)
-                cv2.circle(frame, tuple(point), 8, color, -1)
 
             cv2.putText(
                 frame,
